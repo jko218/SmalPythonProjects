@@ -13,14 +13,29 @@ class GravetyObject:
         pygame.draw.circle(screen, (255, 255, 255), self.pos, self.r)
     def __force__(self, object):
         mass = self.mass * object.mass
-        distance = self.pos.distance_to(object.poss) ** 2
-        force =  mass/distance
+        distance = self.pos.distance_to(object.pos) ** 2
+        force =  (mass * GRAVITY)/distance
         return force
     def __acseleration__(self, force):
         acseleration = force / self.mass
         return acseleration
-    def __speed_change__(self, acseleration):
+    def __speed_change__(self, realtime):
+        # axeleration_vector = 
+        # self.speed = self.speed + 
         pass
-    def move(self, object_list, realtime):
-        
+    def Move(self, object_list):
+        if self.move == True:
+            acseleration = pygame.math.Vector2(0, 0)
+            time = FPS / 1000
+            for object in object_list:
+                if object != self:
+                    acseleration_nr = self.__acseleration__(self.__force__(object))
+                    print(acseleration_nr)
+                    tmp = pygame.math.Vector2(0, 0)
+                    tmp = object.pos - self.pos
+                    tmp.scale_to_length(acseleration_nr)                    
+                    acseleration = acseleration + tmp
+            self.speed = self.speed + acseleration * time
+            self.pos = self.pos + (self.speed * time)
+                
         pass
