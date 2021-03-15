@@ -9,8 +9,9 @@ class GravetyObject:
         self.mass = mass
         self.r = r
         self.move = move
+        self.color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
     def Draw(self, screen):
-        pygame.draw.circle(screen, (255, 255, 255), self.pos, self.r)
+        pygame.draw.circle(screen, self.color, self.pos, self.r)
     def __force__(self, object):
         mass = self.mass * object.mass
         distance = self.pos.distance_to(object.pos) ** 2
@@ -39,3 +40,19 @@ class GravetyObject:
             self.pos = self.pos + (self.speed * time)
                 
         pass
+
+class Object_creater:
+    def __init__(self, t):
+        x,y = t
+        self.mass = 0
+        self.r = 0
+        self.x = x
+        self.y = y
+    def write(self, x, y, screen):
+        font = pygame.font.SysFont("arial", 10)
+        string = "Mass: " + str(self.mass) + "\nRadius: " + str(self.r)
+        info = font.render(string, True, (x, y, 8))
+        screen.blit(info, (round(0.0313 * screen.get_width()) + 2, screen.get_height() - info.get_height()))
+    def create_new_object(self, objectlist):
+        object = GravetyObject(self.x, self.y, random(-60, 60), random(-60, 60), self.mass, self.r, True)
+        objectlist.append(object)

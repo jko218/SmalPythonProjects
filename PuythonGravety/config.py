@@ -7,3 +7,15 @@ GAMELOOP = True
 
 FPS = 60
 GRAVITY = 10
+
+#Bools 
+MOUSE_DOWN = False
+MOUSE_LEFT = False
+MOUSE_RIGHT = False
+
+#Mouse trigers
+LEFTPRESS = 1
+MIDLEPRESS = 2
+RIGHTPRESS = 3
+SCROLEUP = 4
+SCROLEDOWN = 5
